@@ -1,0 +1,15 @@
+<% items = @sides_group.sides_items.all %>
+<style type="text/css">
+	.edit_video { max-width: 250px;}
+	.thumbnail{max-width: 250px;}
+</style>
+<% context.instance_eval  do  
+    table_for(items) do
+      column "Id" do |n|
+        link_to(n.id, admin_sides_items_path(n.id))
+      end
+      column :name
+      column :price
+      
+    end
+end %>
