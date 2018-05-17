@@ -1,0 +1,153 @@
+<div  class="online-area">
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-sm-8 col-md-9">
+            <div class="pizza-bg"></div>
+            <nav id="nav" class="navbar navbar-default" data-spy="affix" data-offset-top="197">
+               <div class="container-fluid">
+                  <div class="navbar-header">
+                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>                        
+                     </button>
+                  </div>
+                  <div>
+                     <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                          <% @menugroups.each do |menu_group| %>
+                            <li><a href="#<%= menu_group.name %>"><%= menu_group.name %></a></li>
+                          <% end %>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </nav>
+            <br />
+            <% @menugroups.each do |menu_group| %>
+              <div id="<%= menu_group.name %>" class="section-box container-fluid">
+                <h4 class="text-center"><%= menu_group.name %></h4>
+                <% menu_group.menu_items.each do |menu_item| %>
+                  <div class="media-box">
+                    <div class="row">
+                       <div class="col-sm-8">
+                          <h4 class="mb0"><%= menu_item.name %></h4>
+                          <% if menu_item.description.present? %>
+                            <p class="mt0"><%= menu_item.description %></p>
+                          <% end %>
+                       </div>
+                       <div class="col-sm-4 text-center">
+                          <p class="mt15"><span><%= "$ " + menu_item.price.to_s %></span> <a href="#myModal<%= menu_item.id%>" data-toggle="modal" class="btn btn-sm btn-danger">+</a></p>
+                       </div>
+                    </div>
+                  </div>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="myModal<%= menu_item.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                     <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              <h4 class="modal-title" id="myModalLabel"><small><%= menu_group.name %></small><br /><%= menu_item.name %><br /></h4>
+                           </div>
+                           <div class="modal-body">
+                              <% menu_item.sides_group.each do |sides_group| %>
+                                <h4><%= sides_group.name %></h4>
+                                <% sides_group.sides_items.each do |side_item| %>
+                                  <div class="radio">
+                                    <label><%= side_item.name %> - <%= "$ " + side_item.price.to_s %> </label><input type="radio" name="<%= sides_group.name %>">
+                                  </div>
+                                  <div class="clearfix"></div>
+                                <% end %>
+                              <% end %>
+                             
+                              <div class="form-group" style="margin-top: 15px;">
+
+                                <textarea class="form-control" rows="3" id="comment" placeholder="Special Instructions"></textarea>
+                              </div>
+                              <p class="pull-right"><a href="" class="btn btn-success">ADD TO CART</a></p>
+                              <div class="clearfix"></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                <% end %>
+        
+              </div>
+            <% end %>
+
+         </div>
+         <!-- col-7 -->
+         <div class="col-sm-4 col-md-3">
+            <div class="shopping-cart">
+               <h4>DELIVERING TO LAHORE–KASUR ROAD ARFA TOWER,</h4>
+               <div class="form-group">
+                  <select class="form-control" id="sel1">
+                     <option>Tue, May 15</option>
+                     <option>Tue, May 16</option>
+                     <option>Tue, May 17</option>
+                     <option>Tue, May 18</option>
+                  </select>
+               </div>
+               <div class="form-group">
+                  <select class="form-control" id="sel1">
+                     <option>Now</option>
+                     <option>2.15 PM</option>
+                     <option>2.30 PM</option>
+                     <option>2.45 PM</option>
+                  </select>
+               </div>
+               <p class="text-center"><span class="fa fa-clock-o"></span>  45 min</p>
+               <h4>YOUR ORDER PIZZA & STEAK - DHA</h4>
+               <p>You haven’t added anything to your cart yet! Start adding your favourite dishes</p>
+               <hr />
+               <table class="table">
+                  <tr>
+                     <td>SubTotal</td>
+                     <td align="right">PKR0.00</td>
+                  </tr>
+                  <tr>
+                     <td>Delivery fee</td>
+                     <td align="right">PKR0.00</td>
+                  </tr>
+                  <tr>
+                     <td><strong>Total</strong> (Incl. GST)</td>
+                     <td align="right"><strong>PKR0.00</strong></td>
+                  </tr>
+               </table>
+               <p><a href="" class="btn btn-checkout">CHECKOUT</a></p>
+            </div>
+            <!-- shoping-cart -->
+         </div>
+      </div>
+   </div>
+</div>
+
+<script type="text/javascript">
+   $(document).ready(function(){ 
+   
+   $("#nav ul li a[href^='#']").on('click', function(e) {
+   
+      // prevent default anchor click behavior
+      e.preventDefault();
+   
+      // store hash
+      var hash = this.hash;
+   
+      // animate
+      $('html, body').animate({
+          scrollTop: $(hash).offset().top
+        }, 1000, function(){
+   
+          // when done, add hash to url
+          // (default click behaviour)
+          window.location.hash = hash;
+        });
+   
+   });
+   
+   
+   });
+</script>
+
+
