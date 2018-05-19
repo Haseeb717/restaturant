@@ -45,28 +45,47 @@
                   <!-- Modal -->
                   <div class="modal fade" id="myModal<%= menu_item.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+                        <div class="modal-content" id="modal_<%= menu_item.id%>">
                            <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                              <h4 class="modal-title" id="myModalLabel"><small><%= menu_group.name %></small><br /><%= menu_item.name %><br /></h4>
+                              <h4 class="modal-title" id="myModalLabel"><small><%= menu_group.name %></small><br /><span id="menu_item_name_<%= menu_item.id%>"><%= menu_item.name %></span><span class="menu_item_price_<%= menu_item.id %>" style="display: none;"><%= menu_item.price %></span><br /></h4>
                            </div>
                            <div class="modal-body">
                               <% menu_item.sides_group.each do |sides_group| %>
                                 <h4><%= sides_group.name %></h4>
                                 <% sides_group.sides_items.each do |side_item| %>
+                                  <span class="side_item_name_<%= side_item.id %>" style="display: none;"><%= side_item.name %></span>
+                                  <span class="side_item_price_<%= side_item.id %>" style="display: none;"><%= side_item.price %></span>
                                   <div class="radio">
-                                    <label><%= side_item.name %> - <%= "$ " + side_item.price.to_s %> </label><input type="radio" name="<%= sides_group.name %>">
+                                    <label><%= side_item.name %> - <%= "$ " + side_item.price.to_s %> </label>
+                                    <input type="radio" name="<%= sides_group.name %>" value="<%= side_item.id %>">
                                   </div>
                                   <div class="clearfix"></div>
                                 <% end %>
                               <% end %>
                              
                               <div class="form-group" style="margin-top: 15px;">
-
-                                <textarea class="form-control" rows="3" id="comment" placeholder="Special Instructions"></textarea>
+                                <textarea class="form-control" rows="3" class="comment" placeholder="Special Instructions"></textarea>
                               </div>
-                              <p class="pull-right"><a href="" class="btn btn-success">ADD TO CART</a></p>
+
+
+                              <div class="pull-left">
+                                 <div class="count-input space-bottom">
+                                    <a class="incr-btn" data-action="decrease" href="#">–</a>
+                                    <input class="quantity" type="text" name="quantity" value="1" id="quantity" />
+                                    <a class="incr-btn" data-action="increase" href="#">&plus;</a>
+                                 </div>
+                              </div>
+                              <div class="pull-right">
+                                <p class="mt15"><button class="btn btn-success" id="<%= menu_item.id%>" onclick="myFunction(<%= menu_item.id %>)">ADD TO CART</button></p>
+                              </div>
+
+
+                              
                               <div class="clearfix"></div>
+
+
+
                            </div>
                         </div>
                      </div>
@@ -80,26 +99,22 @@
          <!-- col-7 -->
          <div class="col-sm-4 col-md-3">
             <div class="shopping-cart">
-               <h4>DELIVERING TO LAHORE–KASUR ROAD ARFA TOWER,</h4>
+               <h4>DEFAULT TIME TAKEN IS 30 MINUTES</h4>
+               
                <div class="form-group">
                   <select class="form-control" id="sel1">
-                     <option>Tue, May 15</option>
-                     <option>Tue, May 16</option>
-                     <option>Tue, May 17</option>
-                     <option>Tue, May 18</option>
+                     <option>Time To Take</option>
+                     <option>45 minutes</option>
+                     <option>1 hour</option>
+                     <option>1.30 hour</option>
+                     <option>2 hours</option>
                   </select>
                </div>
-               <div class="form-group">
-                  <select class="form-control" id="sel1">
-                     <option>Now</option>
-                     <option>2.15 PM</option>
-                     <option>2.30 PM</option>
-                     <option>2.45 PM</option>
-                  </select>
-               </div>
-               <p class="text-center"><span class="fa fa-clock-o"></span>  45 min</p>
-               <h4>YOUR ORDER PIZZA & STEAK - DHA</h4>
-               <p>You haven’t added anything to your cart yet! Start adding your favourite dishes</p>
+               <h4>Restaurant Name</h4>
+               <p>Your order will only be entertain within 9am - 8 pm</p>
+               <table class="table f13 table_order">
+                  
+                </table>
                <hr />
                <table class="table">
                   <tr>
@@ -145,6 +160,25 @@
         });
    
    });
+
+   $(".incr-btn").on("click", function (e) {
+                var $button = $(this);
+                var oldValue = $button.parent().find('.quantity').val();
+                $button.parent().find('.incr-btn[data-action="decrease"]').removeClass('inactive');
+                if ($button.data('action') == "increase") {
+                    var newVal = parseFloat(oldValue) + 1;
+                } else {
+                    // Don't allow decrementing below 1
+                    if (oldValue > 1) {
+                        var newVal = parseFloat(oldValue) - 1;
+                    } else {
+                        newVal = 1;
+                        $button.addClass('inactive');
+                    }
+                }
+                $button.parent().find('.quantity').val(newVal);
+                e.preventDefault();
+            });
    
    
    });
