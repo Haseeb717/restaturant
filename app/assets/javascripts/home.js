@@ -10,10 +10,10 @@ function myFunction(id){
   if(radio_button.length == 0){
 
   	if(description.length !=0){
-			row = "<tr><td>" + quantity.toString() + "x " + menu_item_name +  span + "<br><span class='new_line'> + "+ description +"</span></td><td>" + quantity*menu_item_price + "</td></tr>";
+			row = "<tr><td>" + quantity.toString() + " x " + menu_item_name +  span + "<br><span class='new_line'> + "+ description +"</span></td><td>" + quantity*menu_item_price + "</td></tr>";
 		}
 		else{
-			row = "<tr><td>" + quantity.toString() + "x " + menu_item_name +  span + "</td><td>" + quantity*menu_item_price + "</td></tr>";
+			row = "<tr><td>" + quantity.toString() + " x " + menu_item_name +  span + "</td><td>" + quantity*menu_item_price + "</td></tr>";
 		}
 
 
@@ -24,7 +24,7 @@ function myFunction(id){
 			selected.push($(this).attr('value'));
 		});
 
-		column = "<td>"+ quantity.toString() + "x " + menu_item_name;
+		column = "<td>"+ quantity.toString() + " x " + menu_item_name;
 		$.each(selected,function(index,value){
 			sides_item_id = value;
 		  sides_item_name = $(".side_item_name_"+sides_item_id).text();
