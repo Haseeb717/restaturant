@@ -65,14 +65,14 @@
                               <% end %>
                              
                               <div class="form-group" style="margin-top: 15px;">
-                                <textarea class="form-control" rows="3" class="comment" placeholder="Special Instructions"></textarea>
+                                <textarea class="form-control comment<%= menu_item.id %>" rows="3" placeholder="Special Instructions"></textarea>
                               </div>
 
 
                               <div class="pull-left">
                                  <div class="count-input space-bottom">
                                     <a class="incr-btn" data-action="decrease" href="#">–</a>
-                                    <input class="quantity" type="text" name="quantity" value="1" id="quantity" />
+                                    <input class="quantity<%= menu_item.id %>" type="text" name="quantity" value="1" id="quantity" />
                                     <a class="incr-btn" data-action="increase" href="#">&plus;</a>
                                  </div>
                               </div>
