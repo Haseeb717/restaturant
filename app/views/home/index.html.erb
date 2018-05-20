@@ -72,7 +72,7 @@
                               <div class="pull-left">
                                  <div class="count-input space-bottom">
                                     <a class="incr-btn" data-action="decrease" href="#">–</a>
-                                    <input class="quantity<%= menu_item.id %>" type="text" name="quantity" value="1" id="quantity" />
+                                    <input class="count quantity<%= menu_item.id %>" type="text" name="quantity" value="1" id="quantity" />
                                     <a class="incr-btn" data-action="increase" href="#">&plus;</a>
                                  </div>
                               </div>
@@ -163,7 +163,7 @@
 
    $(".incr-btn").on("click", function (e) {
                 var $button = $(this);
-                var oldValue = $button.parent().find('.quantity').val();
+                var oldValue = $button.parent().find('.count').val();
                 $button.parent().find('.incr-btn[data-action="decrease"]').removeClass('inactive');
                 if ($button.data('action') == "increase") {
                     var newVal = parseFloat(oldValue) + 1;
@@ -176,7 +176,7 @@
                         $button.addClass('inactive');
                     }
                 }
-                $button.parent().find('.quantity').val(newVal);
+                $button.parent().find('.count').val(newVal);
                 e.preventDefault();
             });
    
