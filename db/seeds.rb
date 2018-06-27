@@ -36,8 +36,28 @@
 # menuitem13 = MenuItem.create!(:name=>"Bay Shrimp, cream cheese & avocado",:price=>9.75,:menu_group_id=>menu1.id)
 # menuitem14 = MenuItem.create!(:name=>"Hummus Veggie",:description=>"tomato, onion, cucumber, sprouts & lettuce in a pita",:price=>8.75,:menu_group_id=>menu1.id)
 
-MenuItem.first(10).each do |menu_item|
-	group = SidesGroup.create!(:name=>"Select Size",:menu_item_id=>menu_item.id) 
-	SidesItem.create!(:name=>"Half Sandwich",:price=>7.75,:menu_item_id=>menu_item.id,:sides_group_id=>group.id)
-	SidesItem.create!(:name=>"Full Sandwich",:price=>8.75,:menu_item_id=>menu_item.id,:sides_group_id=>group.id)
+# MenuItem.first(10).each do |menu_item|
+# 	group = SidesGroup.create!(:name=>"Select Size",:menu_item_id=>menu_item.id) 
+# 	SidesItem.create!(:name=>"Half Sandwich",:price=>7.75,:menu_item_id=>menu_item.id,:sides_group_id=>group.id)
+# 	SidesItem.create!(:name=>"Full Sandwich",:price=>8.75,:menu_item_id=>menu_item.id,:sides_group_id=>group.id)
+# end
+
+
+menu2 = MenuGroup.find_by_name("Soup")
+menuitem1 = MenuItem.create!(:name=>"Small Soup & Salad Combo",:price=>7.95,:menu_group_id=>menu2.id)
+menuitem2 = MenuItem.create!(:name=>"Large Soup & Salad Combo",:price=>9.25,:menu_group_id=>menu2.id)
+menuitem3 = MenuItem.create!(:name=>"Homemade, hot & hearty",:menu_group_id=>menu2.id)
+
+group = SidesGroup.create!(:name=>"Select Size",:menu_item_id=>menu_item1.id) 
+SidesItem.create!(:name=>"Cup",:price=>3.95,:menu_item_id=>menu_item1.id,:sides_group_id=>group.id)
+SidesItem.create!(:name=>"Bowl",:price=>4.95,:menu_item_id=>menu_item1.id,:sides_group_id=>group.id)
+
+MenuItem.where(:id=>[menuitem3.id,menuitem2.id,menuitem1.id]).each do |menu_item|
+	group = SidesGroup.create!(:name=>"Select Dressings",:menu_item_id=>menu_item.id) 
+	SidesItem.create!(:name=>"Bleu Cheese",:menu_item_id=>menu_item.id,:sides_group_id=>group.id)
+	SidesItem.create!(:name=>"Thousand Island",:menu_item_id=>menu_item.id,:sides_group_id=>group.id)
+	SidesItem.create!(:name=>"Creamy Dill",:menu_item_id=>menu_item.id,:sides_group_id=>group.id)
+	SidesItem.create!(:name=>"Dijon Vinaigrette",:menu_item_id=>menu_item.id,:sides_group_id=>group.id)
+	SidesItem.create!(:name=>"Honey Mustard",:menu_item_id=>menu_item.id,:sides_group_id=>group.id)
+	SidesItem.create!(:name=>"Thai Peanut",:menu_item_id=>menu_item.id,:sides_group_id=>group.id)
 end
