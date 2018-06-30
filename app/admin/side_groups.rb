@@ -17,14 +17,16 @@ ActiveAdmin.register SidesGroup do
     end
 		f.actions
 	end
-	
+
 
 	show do
   	@sides_group = SidesGroup.find(params["id"])
     attributes_table do
       row :name
       row "Menu Item" do |n|
-	      link_to(n.menu_item.name, admin_menu_item_path(n.menu_item_id))
+      	n.menu_items.each do |item|
+		      link_to(item.name, admin_menu_item_path(item.id))
+		    end
 	    end
     end
     panel "Sides Items" do
