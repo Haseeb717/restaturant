@@ -17,6 +17,7 @@ ActiveAdmin.register SidesGroup do
     end
 		f.actions
 	end
+	
 
 	show do
   	@sides_group = SidesGroup.find(params["id"])
