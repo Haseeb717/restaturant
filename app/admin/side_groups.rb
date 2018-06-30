@@ -6,6 +6,7 @@ ActiveAdmin.register SidesGroup do
 		f.inputs "SidesGroup" do 
 			f.input :name
 			f.input :side_type, :prompt => 'Select Sides Type', :as => :select, :collection => ["Extra","Choice"]
+			f.input :group_sides
 			f.input :menu_item_id, :prompt => 'Select Menu Item', :as => :select, :collection => MenuItem.all.map{|m| [m.name, m.id]}
 		end
 		f.has_many :sides_items,heading: 'Items of Sides Group' do |item|
