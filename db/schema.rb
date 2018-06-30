@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180513113850) do
+ActiveRecord::Schema.define(version: 20180630073844) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -73,6 +76,8 @@ ActiveRecord::Schema.define(version: 20180513113850) do
     t.integer "menu_item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "side_type"
+    t.boolean "group_sides"
     t.index ["menu_item_id"], name: "index_sides_groups_on_menu_item_id"
   end
 
