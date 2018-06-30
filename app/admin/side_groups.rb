@@ -1,5 +1,5 @@
 ActiveAdmin.register SidesGroup do
-	permit_params :name,:menu_item_id,:group_side,:side_type,:multi_select,:sides_items_attributes: [:id,:name,:price,:menu_item_id, :_destroy ]
+	permit_params :name,:menu_item_id,:group_side,:side_type,:multi_select,sides_items_attributes: [:id,:name,:price,:menu_item_id, :_destroy ]
 
 	form do |f|
 		f.semantic_errors *f.object.errors.keys
