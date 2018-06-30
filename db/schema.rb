@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180630101757) do
+ActiveRecord::Schema.define(version: 20180630190223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20180630101757) do
     t.string "side_type"
     t.boolean "group_side"
     t.boolean "multi_select"
+    t.integer "menu_group_id"
     t.index ["menu_item_id"], name: "index_sides_groups_on_menu_item_id"
   end
 
