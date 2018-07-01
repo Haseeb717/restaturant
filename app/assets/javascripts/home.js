@@ -34,7 +34,7 @@ function myFunction(id){
 		  sides_item_type = $(".side_item_type_"+sides_item_id).text();
 
 		  if(sides_item_price.length != 0) {
-		  	if (side_item_type == "Extra"){
+		  	if (sides_item_type == "Extra"){
 		  		menu_item_price = (quantity*sides_item_price)+menu_item_price;
 		  	}
 		  	else{
