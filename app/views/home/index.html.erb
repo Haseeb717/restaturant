@@ -63,8 +63,8 @@
                                   <div class="clearfix"></div>
                                 <% end %>
                               <% end %>
-                              <% group_menu_items = menu_item
-                              <% menu_item.sides_group.each do |sides_group| %>
+                              <% group_menu_items = SidesGroup.where(:menu_group_id => menu_item.menu_group_id,:group_side => true) %>
+                              <% group_menu_items.each do |sides_group| %>
                                 <h4><%= sides_group.name %></h4>
                                 <% sides_group.sides_items.each do |side_item| %>
                                   <span class="side_item_name_<%= side_item.id %>" style="display: none;"><%= side_item.name %></span>
