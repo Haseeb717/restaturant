@@ -61,7 +61,7 @@
                                 <% sides_group.sides_items.each do |side_item| %>
                                   <span class="side_item_name_<%= side_item.id %>" style="display: none;"><%= side_item.name %></span>
                                   <span class="side_item_price_<%= side_item.id %>" style="display: none;"><%= side_item.price %></span>
-                                  <span class="side_item_type_<%= side_item.id %>" style="display: none;"><%= side_item.side_type %></span>
+                                  <span class="side_item_type_<%= side_item.id %>" style="display: none;"><%= side_item.side_group.side_type %></span>
                                   <div class="radio">
                                     <label><%= side_item.name %>
                                       <% if side_item.price.present? %> 
