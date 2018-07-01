@@ -56,11 +56,12 @@
                               <h4 class="modal-title" id="myModalLabel"><small><%= menu_group.name %></small><br /><span id="menu_item_name_<%= menu_item.id%>"><%= menu_item.name %></span><span class="menu_item_price_<%= menu_item.id %>" style="display: none;"><%= menu_item.price %></span><br /></h4>
                            </div>
                            <div class="modal-body">
-                              <% menu_item.sides_group.where('group_side IS ? OR group_side !=?',nil,false).each do |sides_group| %>
+                              <% menu_item.sides_group.where('group_side IS ? OR group_side =?',nil,false).each do |sides_group| %>
                                 <h4><%= sides_group.name %></h4>
                                 <% sides_group.sides_items.each do |side_item| %>
                                   <span class="side_item_name_<%= side_item.id %>" style="display: none;"><%= side_item.name %></span>
                                   <span class="side_item_price_<%= side_item.id %>" style="display: none;"><%= side_item.price %></span>
+                                  <span class="side_item_type_<%= side_item.id %>" style="display: none;"><%= side_item.side_type %></span>
                                   <div class="radio">
                                     <label><%= side_item.name %>
                                       <% if side_item.price.present? %> 
@@ -154,16 +155,8 @@
                <hr />
                <table class="table">
                   <tr>
-                     <td>SubTotal</td>
-                     <td align="right">PKR0.00</td>
-                  </tr>
-                  <tr>
-                     <td>Delivery fee</td>
-                     <td align="right">PKR0.00</td>
-                  </tr>
-                  <tr>
-                     <td><strong>Total</strong> (Incl. GST)</td>
-                     <td align="right"><strong>PKR0.00</strong></td>
+                     <td><strong>Total</strong></td>
+                     <td align="right"><strong>$ <span id="total">0.00</span></strong></td>
                   </tr>
                </table>
                <p><a href="" class="btn btn-checkout">CHECKOUT</a></p>
