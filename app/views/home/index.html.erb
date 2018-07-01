@@ -51,7 +51,7 @@
                               <h4 class="modal-title" id="myModalLabel"><small><%= menu_group.name %></small><br /><span id="menu_item_name_<%= menu_item.id%>"><%= menu_item.name %></span><span class="menu_item_price_<%= menu_item.id %>" style="display: none;"><%= menu_item.price %></span><br /></h4>
                            </div>
                            <div class="modal-body">
-                              <% menu_item.sides_group.where('group_side !=',true).each do |sides_group| %>
+                              <% menu_item.sides_group.where('group_side !=?',true).each do |sides_group| %>
                                 <h4><%= sides_group.name %></h4>
                                 <% sides_group.sides_items.each do |side_item| %>
                                   <span class="side_item_name_<%= side_item.id %>" style="display: none;"><%= side_item.name %></span>
