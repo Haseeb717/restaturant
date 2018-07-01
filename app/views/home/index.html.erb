@@ -37,7 +37,12 @@
                           <% end %>
                        </div>
                        <div class="col-sm-4 text-center">
-                          <p class="mt15"><span><%= "$ " + menu_item.price.to_s %></span> <a href="#myModal<%= menu_item.id%>" data-toggle="modal" class="btn btn-sm btn-danger">+</a></p>
+                          <p class="mt15">
+                            <% if menu_item.price.present? %> 
+                              <span><%= "$ " + menu_item.price.to_s %></span>
+                            <% end %> 
+                            <a href="#myModal<%= menu_item.id%>" data-toggle="modal" class="btn btn-sm btn-danger">+</a>
+                          </p>
                        </div>
                     </div>
                   </div>
@@ -57,7 +62,11 @@
                                   <span class="side_item_name_<%= side_item.id %>" style="display: none;"><%= side_item.name %></span>
                                   <span class="side_item_price_<%= side_item.id %>" style="display: none;"><%= side_item.price %></span>
                                   <div class="radio">
-                                    <label><%= side_item.name %> - <%= "$ " + side_item.price.to_s %> </label>
+                                    <label><%= side_item.name %>
+                                      <% if side_item.price.present? %> 
+                                        <span> - <%= "$ " + side_item.price.to_s %></span>
+                                      <% end %> 
+                                    </label>
                                     <input type="radio" name="<%= sides_group.name %>" value="<%= side_item.id %>">
                                   </div>
                                   <div class="clearfix"></div>
@@ -70,7 +79,11 @@
                                   <span class="side_item_name_<%= side_item.id %>" style="display: none;"><%= side_item.name %></span>
                                   <span class="side_item_price_<%= side_item.id %>" style="display: none;"><%= side_item.price %></span>
                                   <div class="radio">
-                                    <label><%= side_item.name %> - <%= "$ " + side_item.price.to_s %> </label>
+                                    <label><%= side_item.name %>
+                                      <% if side_item.price.present? %> 
+                                        <span> - <%= "$ " + side_item.price.to_s %></span>
+                                      <% end %> 
+                                    </label>
                                     <input type="radio" name="<%= sides_group.name %>" value="<%= side_item.id %>">
                                   </div>
                                   <div class="clearfix"></div>
