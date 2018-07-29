@@ -26,7 +26,7 @@ function myFunction(id){
 			selected.push($(this).attr('value'));
 		});
 
-		column = "<td>"+ quantity.toString() + " x " + menu_item_name;
+		column = "<td><span class='quantity'>"+ quantity.toString() + "</span> x " + menu_item_name;
 		$.each(selected,function(index,value){
 			sides_item_id = value;
 		  sides_item_name = $(".side_item_name_"+sides_item_id).text();
@@ -60,5 +60,7 @@ function myFunction(id){
 	total_price = total_price + existing_total;
 	$("#total").text(total_price);
 	$('#myModal'+id).modal('hide');
+	$('.btn-checkout').css("cssText", "background-color: green !important;");
+	$('.stripe-button').attr('data-amount', total_price);
 	total_price = 0;
 }

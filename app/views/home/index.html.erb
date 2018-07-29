@@ -161,7 +161,7 @@
                </table>
                <p><a href="" class="btn btn-checkout">CHECKOUT</a></p>
 
-               <p>
+               <div class="stripe">
                 <%= form_tag charges_path do %>
                   <article>
                     <% if flash[:error].present? %>
@@ -174,11 +174,10 @@
 
                   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                          data-description="A month's subscription"
-                          data-amount="500"
+                          data-description="Complete your order"
                           data-locale="auto"></script>
                 <% end %>
-               </p>
+               </div>
             </div>
             <!-- shoping-cart -->
          </div>
@@ -187,9 +186,9 @@
 </div>
 
 <script type="text/javascript">
-   $(document).ready(function(){ 
+  $(document).ready(function(){ 
    
-   $("#nav ul li a[href^='#']").on('click', function(e) {
+    $("#nav ul li a[href^='#']").on('click', function(e) {
    
       // prevent default anchor click behavior
       e.preventDefault();
@@ -202,34 +201,56 @@
           scrollTop: $(hash).offset().top
         }, 1000, function(){
    
-          // when done, add hash to url
-          // (default click behaviour)
-          window.location.hash = hash;
-        });
-   
-   });
+        // when done, add hash to url
+        // (default click behaviour)
+        window.location.hash = hash;
+      });
+    });
 
-   $(".incr-btn").on("click", function (e) {
-                var $button = $(this);
-                var oldValue = $button.parent().find('.count').val();
-                $button.parent().find('.incr-btn[data-action="decrease"]').removeClass('inactive');
-                if ($button.data('action') == "increase") {
-                    var newVal = parseFloat(oldValue) + 1;
-                } else {
-                    // Don't allow decrementing below 1
-                    if (oldValue > 1) {
-                        var newVal = parseFloat(oldValue) - 1;
-                    } else {
-                        newVal = 1;
-                        $button.addClass('inactive');
-                    }
-                }
-                $button.parent().find('.count').val(newVal);
-                e.preventDefault();
-            });
+    $(".incr-btn").on("click", function (e) {
+      var $button = $(this);
+      var oldValue = $button.parent().find('.count').val();
+      $button.parent().find('.incr-btn[data-action="decrease"]').removeClass('inactive');
+      if ($button.data('action') == "increase") {
+          var newVal = parseFloat(oldValue) + 1;
+      } else {
+          // Don't allow decrementing below 1
+          if (oldValue > 1) {
+              var newVal = parseFloat(oldValue) - 1;
+          } else {
+              newVal = 1;
+              $button.addClass('inactive');
+          }
+      }
+      $button.parent().find('.count').val(newVal);
+      e.preventDefault();
+    });
+    
+    $(".btn-checkout").on("click",function(e){
+      e.preventDefault();
+      var CPRID = []
+      $(".table_order tr").each(function(i,e1){
+        var $tds = $(this).find('td');
+        price = $tds.eq(1).text();
+        order = $tds.eq(0);
+        menu = order.text();
+        quantity = order.find(".quantity").text();
+        CPRID[i] = [quantity,menu,price];
+      })
+
+      $.ajax({
+        type: 'GET',
+        url: "/home/order",
+        data: {order:CPRID}
+      }).done(function ( data ) {
+        $('.stripe-button').attr('data-order', data.order);
+        $('.btn-checkout').css("cssText", "background-color: grey !important;");
+        $('.stripe').show();
+      });
+    })
    
-   
-   });
+  });
+
 </script>
 
 
