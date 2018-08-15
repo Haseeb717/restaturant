@@ -14,4 +14,17 @@ class HomeController < ApplicationController
   	end
   	render json: {:success=>true, :order=>order.id}, :status=>200
   end
+
+  def payment
+    set_cart
+    set_user
+    calcul_total
+    new_charge
+    if @charge.save
+      redirect_to new_order_path
+    else
+      flash[:error] = "Problème de paiement"
+      redirect_to mon_panier_path
+    end
+  end
 end
